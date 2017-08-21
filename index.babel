@@ -1,0 +1,148 @@
+class Entry extends React.Component {
+  constructor(props){
+    super(props)
+    
+    this.state = {
+      border_width: 1
+    }
+  }
+  
+  changeBorder(){
+    this.setState({border_width: 10})
+  }
+  
+  changeBorderBack(){
+    this.setState({border_width: 5})
+  }
+  
+  render(){
+    return (
+      <div onMouseUp={this.changeBorderBack.bind(this)} onMouseDown={this.changeBorder.bind(this)} style={{border: this.state.border_width + "px solid " + this.props.color, margin: 50, padding: 25}} >
+        <h3>{this.props.title}</h3>
+        <img style={{width: 200}} src={this.props.img_src}></img>
+        <p>{this.props.text}</p>
+      </div>
+    )
+  }
+}
+
+class Blog extends React.Component {
+  constructor(props){
+    super(props)
+    
+    this.state = {
+      title_color: "black",
+      entry_number: 0 //This is kind of silly. Use 0 with function or 1000
+    }
+  }
+  
+  changeTitleColor(){
+    this.setState({title_color: "purple"})
+  }
+  
+  changeTitleColorBack(){
+    this.setState({title_color: "black"})
+  }
+  
+  previousEntry(){
+    this.setState({entry_number: this.state.entry_number-1})
+  }
+  
+  nextEntry() {
+    this.setState({entry_number: this.state.entry_number+1})
+  }
+ 
+  
+  render() {
+    return (
+      <div>
+        <center>
+         <h1 onMouseDown={this.changeTitleColor.bind(this)} onMouseUp={this.changeTitleColorBack.bind(this)} style={{color: this.state.title_color}}>The Ice Breaker Game</h1>
+          
+        <button onClick={this.previousEntry.bind(this)}>Previous</button>
+        <button onClick={this.nextEntry.bind(this)}>Next</button>
+        </center>
+        
+        {this.displayCurrentEntry()}
+      </div>
+    )
+  } 
+  
+  actualEntryNumber(){
+    if(this.state.entry_number < 0) {
+      return (21 - this.state.entry_number) % 21
+    } else {
+      return this.state.entry_number % 21
+    }
+  }
+  
+  displayCurrentEntry(){
+    var entry_number = this.actualEntryNumber()
+    
+    if(entry_number == 0)
+      return <center> <Entry title="" text="What is the best part of your job?" img_src="http://altoday.com/wp-content/uploads/2015/11/jobless-rate-unemployment-jobs.jpg" color="blue"></Entry> </center>
+      
+    if(entry_number == 1)
+      return <center> <Entry title="" text="If you could be any animal what would it be and why?" img_src="https://www.cambridgema.gov/~/media/Images/sharedphotos/departmentphotos/animal.jpg" color="green"></Entry> </center>
+      
+    if(entry_number == 2)
+      return <center> <Entry title="" text="Who was the most influential person in your career choice?" img_src="https://notsopublic.com/wp-content/uploads/sites/2/2016/08/02034511/People-II-Modified.png" color="purple"></Entry> </center>
+      
+    if(entry_number == 3)
+      return <center> <Entry title="" text="Would you rather be able to control fire or water?" img_src="https://www.joyyoga.com.au/wp-content/uploads/2017/02/25744.jpg" color="red"></Entry> </center>
+      
+    if(entry_number == 4)
+      return <center> <Entry title="" text="What's the best technique you have been using to better manage your time?" img_src="http://www.jobhuntersbible.com/assets/images/uploads/Screen%20Shot%202014-12-14%20at%2011.40.48%20PM.png" color="black"></Entry> </center>
+     
+    if(entry_number == 5)
+      return <center> <Entry title="" text="What was your best decision in the last year?" img_src="https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAS4AAAAJGVkMDg4NDllLTc0MGItNDFhYi1hZTk2LTZkZjc2ZjNkNzBmOA.jpg" color="orange"></Entry> </center>
+      
+    if(entry_number == 6)
+      return <center> <Entry title="" text="What sport would be the funniest to add a mandatory amount of alcohol to?" img_src="https://d6vze32yv269z.cloudfront.net/organizations/b0999730-c98f-417c-9dfb-edbfde591991/blocks/9080f135-6087-4d5e-acc5-cacabef54291/hpfulq-1234.jpg" color="blue"></Entry> </center>
+      
+    if(entry_number == 7)
+      return <center> <Entry title="" text="If you could have any job and money was not an issue what would it be and why?" img_src="https://good.co/blog/wp-content/uploads/2014/03/Optimized-shutterstock_111469742-720x480.jpg" color="white"></Entry> </center>
+      
+    if(entry_number == 8)
+      return <center> <Entry title="" text="If someone asked to be your apprentice and learn all that you know, what would you teach them?" img_src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Apprenticeship.jpg/220px-Apprenticeship.jpg" color="purple"></Entry> </center>
+      
+    if(entry_number == 9)
+      return <center> <Entry title="" text="How much do you follow the news?" img_src="http://fedoforg.org/wp-content/uploads/2016/10/01.jpg" color="green"></Entry> </center>
+      
+    if(entry_number == 10)
+      return <center> <Entry title="" text="What are your plans for the weekend?" img_src="https://www.cheatsheet.com/wp-content/uploads/2015/07/Weekend-Just-Ahead.jpg" color="black"></Entry> </center>
+      
+    if(entry_number == 11)
+      return <center> <Entry title="" text="What do you do in your free time?" img_src="http://blog.sdltrados.com/wp-content/uploads/2016/09/4-stress-free-time-management-tips-to-boost-translation-productivity.png" color="blue"></Entry> </center>
+      
+    if(entry_number == 12)
+      return <center> <Entry title="" text="Who are some of your favorite actors or actresses?" img_src="http://4.bp.blogspot.com/-sYAOh0WR9w8/Tb42kvvGoiI/AAAAAAAAB5A/T6vatUakWC4/s1600/Beautiful+People.jpg" color="red"></Entry> </center>
+      
+    if(entry_number == 13)
+      return <center> <Entry title="" text="If you could replace your arm with any kind of imaginary arm what would it be?" img_src="http://images.clipartpanda.com/arm-clipart-arm-hand-md.png" color="yellow"></Entry> </center>
+      
+    if(entry_number == 14)https://i.ytimg.com/vi/txaMzn3iBHk/maxresdefault.jpg
+      return <center> <Entry title="" text="Would you rather be able to talk to land animals, animals that fly, or animals that live under the water?" img_src="https://i.ytimg.com/vi/txaMzn3iBHk/maxresdefault.jpg" color="purple"></Entry> </center>
+      
+    if(entry_number == 15)
+      return <center> <Entry title="" text="What kind of music are you into?" img_src="http://az616578.vo.msecnd.net/files/2015/12/19/6358614596527738711752945771_music.jpg" color="purple"></Entry> </center>
+      
+    if(entry_number == 16)
+      return <center> <Entry title="" text="Would you rather never use social media sites / apps again or never watch another movie or TV show?" img_src="http://socialbarrel.com/wp-content/uploads/2016/11/Social-Media-TV.jpg" color="purple"></Entry> </center>
+      
+    if(entry_number == 17)
+      return <center> <Entry title="" text="Would you rather give up bathing for a month or give up the internet for a month?" img_src="http://www.goldenrural.org/wp-content/uploads/2016/04/internet.jpg" color="purple"></Entry> </center>
+      
+    if(entry_number == 18)
+      return <center> <Entry title="" text="If you could have an imaginary pet what would it be and why?" img_src="https://1.bp.blogspot.com/-5rJQunSLIMA/V5dodJVi21I/AAAAAAAAiE4/GrrZ3v7YtEYrveLwqOcjEQWZixs43R3DQCLcB/s1600/pet%2Bplan%2Bdrawing%2B2.jpg" color="yellow"></Entry> </center>
+      
+    if(entry_number == 19)
+      return <center> <Entry title="" text="What is one thing that annoys you the most?" img_src="https://lh4.ggpht.com/qLbdneVfyy1X_DdaRZQym9txxo2eJdpm6jCnjvKXItFSUDfVj7Mm6_BR5OMl2jS_BhA_=w300" color="white"></Entry> </center>
+      
+    if(entry_number == 20)
+      return <center> <Entry title="" text="Would you rather be a famous director or a famous actor?" img_src="http://i2.cdn.cnn.com/cnnnext/dam/assets/160229084143-01-leonardo-dicaprio-0229-super-169.jpg" color="yellow"></Entry> </center>  
+  }
+}
+
+//Here is some boring code that all react apps have
+React.render(<Blog></Blog>, document.getElementById('app'));
